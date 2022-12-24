@@ -1,0 +1,19 @@
+{
+  "name": "musinsa",
+  "version": "1.0.0",
+  "description": "��#\u0000 \u0000m\u0000u\u0000s\u0000i\u0000n\u0000s\u0000a\u0000\r\u0000 \u0000#\u0000 \u0000m\u0000u\u0000s\u0000i\u0000n\u0000s\u0000a\u0000\r\u0000 \u0000",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sunny-jang/musinsa.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sunny-jang/musinsa/issues"
+  },
+  "homepage": "https://github.com/sunny-jang/musinsa#readme"
+}
