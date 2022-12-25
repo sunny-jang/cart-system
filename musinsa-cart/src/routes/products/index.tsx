@@ -18,22 +18,22 @@ export default function App ({}: IAppProps) {
   const [list, setList] = useState<Product[][]>([]);
 
   const chunk = (list:Array<Product>, size:number)=> {
+    let sortedList = list.sort((a,b) => a.score-b.score);
     let _list:Array<Array<Product>> = [];
     for (let i = 0; i < list.length; i += size) {
-      _list.push(list.slice(i, i + size));
+      _list.push(sortedList.slice(i, i + size));
     }
     return _list;
   }
   
   useEffect(()=>{
     setList(chunk(productItems, divNum));
-    console.log(list)
   },[]);
 
   return (
     <div className={styles.products}>
       {
-        list?.[0]?.map((product, index)=>{
+        list?.[page-1]?.map((product, index)=>{
             return <div key={index} className={styles.product}>
                 <div className={styles.productThumbnail}><img src={product.detail_image_url} /></div>
                 <div className={styles.productInfo}>
@@ -42,6 +42,11 @@ export default function App ({}: IAppProps) {
                 </div>
             </div>
         })
+      }
+      {
+        list.map((item, index)=>{
+          return <button key={index} onClick={()=>setPage(index+1)}>{index+1}</button>
+        }) 
       }
     </div>
   );
