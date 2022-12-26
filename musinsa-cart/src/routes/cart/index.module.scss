@@ -1,3 +1,9 @@
-body {
-  
+.cartItem {
+  display: flex;
+  align-items: center;
+
+  input {
+    margin-left: 10px;
+    margin-right: 10px;
+  }
 }
