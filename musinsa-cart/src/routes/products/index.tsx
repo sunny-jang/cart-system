@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import Product from '../../components/product/Products';
 import { productItems } from '../../data/data.js';
 import styles from './products.module.scss';
 
@@ -42,11 +43,10 @@ const useCartState = ()=>{
   return [cart, modifyCart];
 }
 
-export default function App ({}: IAppProps) {
+export default function Products ({}: IAppProps) {
   const [divNum, setDivNum] = useState(5);
   const [page, setPage] = useState(1);
   const [list, setList] = useState<Product[][]>([]);
-  const [cart, setCart] = useCartState();
 
   const chunk = (list:Array<Product>, size:number)=> {
     let sortedList = list.sort((a,b) => a.score-b.score);
@@ -65,15 +65,7 @@ export default function App ({}: IAppProps) {
     <div className={styles.products}>
       {
         list?.[page-1]?.map((product, index)=>{
-            return <div key={index} className={styles.product}>
-                <div className={styles.productThumbnail}><img src={product.detail_image_url} /></div>
-                <div className={styles.productInfo}>
-                  <div className={styles.productName}>{product.item_name}</div>
-                  <div className={styles.productPrice}>{product.price}원</div>
-
-                  <button onClick={()=>{setCart(product.item_no)}}>{cart?.includes(product.item_no) ? '빼기' : '담기'}</button>
-                </div>
-            </div>
+            return <Product product={product} key={index} />
         })
       }
       {
