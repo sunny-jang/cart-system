@@ -7,14 +7,6 @@ export interface IAppProps {
   product: Product
 }
 
-interface Product {
-	item_no: number,
-  item_name: string,
-  detail_image_url: string,
-  price: number,
-  score: number,
-}
-
 const useCartState = ()=>{
   let [cart, setCart] = useState(JSON.parse(localStorage.getItem("cart")+''));
   
