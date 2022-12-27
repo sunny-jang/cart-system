@@ -3,22 +3,34 @@ import { productItems, coupons } from '../../data/data.js';
 import styles from './index.module.scss';
 import _ from 'lodash';
 import Product from '../../components/product/Products';
-import Products from '../products/index.js';
+import classnames from 'classnames';
 
 export interface IAppProps {}
 
 export default function Cart ({}: IAppProps) {
   const [selectedItems, setSelectedItems] = useState<Array<CartItem>>([]);
   const [cartItems, setCartItems] = useState<Array<CartItem>>([]);
+  const [totalPrice, setTotalPrice] = useState(0);
+  const [isCouponOpen, setIsCouponOpen] = useState(false);
+  const [selectedCoupon, setSelectedCoupon] = useState<Coupon>()
 
   useEffect(()=>{
     let addedItems = JSON.parse(localStorage.getItem("cart")+'');
     let items: CartItem[] = addedItems.map((item: number)=>{
-      return _.find(productItems, { item_no: item });
+      return {...(_.find(productItems, { item_no: item })), amount: 1};
     });
 
     setCartItems(items);
   },[]);
+
+  useEffect(()=>{
+    let sum = 0;
+    selectedItems.map((item)=>{
+      sum += ((item.amount) * item.price)
+    });
+
+    setTotalPrice(sum);
+  },[selectedItems, selectedCoupon])
 
   const changeSelectedItems = (item:CartItem) => {
     if(_.find(selectedItems, {item_no: item.item_no})) {
@@ -35,8 +47,9 @@ export default function Cart ({}: IAppProps) {
       
       if(_item) {
         if(!_item.amount) _item.amount = 1;
+
         if(operater === 'plus') {_item.amount += 1}
-        else if(operater === 'minus'){
+        if(operater === 'minus'){
           if(_item.amount >= 2) _item.amount -= 1
         }
 
@@ -48,11 +61,12 @@ export default function Cart ({}: IAppProps) {
   return (
     <div className={styles.cart}>
       <h2>장바구니</h2>
+      <div className={styles.cartList}>
       {
         cartItems.map((item, index)=>{
           const isChecked = _.find(selectedItems, {item_no: item.item_no})? true: false;
           return (
-            <div className={styles.cartItem}>
+            <div className={styles.cartItem} key={index}>
               <input 
                 className={styles.checkbox}
                 type="checkbox"
@@ -74,6 +88,25 @@ export default function Cart ({}: IAppProps) {
             )
         })
       }
+      </div>
+      <div>
+        상품 가격 : {totalPrice}<br/>
+        선택된 쿠폰 : {selectedCoupon?.title}<br/>
+        <button onClick={()=>{setIsCouponOpen(!isCouponOpen)}}>쿠폰사용</button><br/>
+        <div 
+          className={classnames(styles.couponList,{[styles.isShow]: isCouponOpen})}>
+          {coupons.map((coupon,index) => {
+            return <div 
+              onClick={()=>{
+                setSelectedCoupon(coupon);
+                setIsCouponOpen(!isCouponOpen)
+              }}
+              className={styles.coupon} 
+              key={index}>{coupon.title}
+            </div>
+          })}
+        </div>
+      </div>
     </div>
   );
 }
