@@ -47,18 +47,29 @@ export default function Cart ({}: IAppProps) {
   
   return (
     <div className={styles.cart}>
+      <h2>장바구니</h2>
       {
         cartItems.map((item, index)=>{
+          const isChecked = _.find(selectedItems, {item_no: item.item_no})? true: false;
           return (
             <div className={styles.cartItem}>
               <input 
+                className={styles.checkbox}
                 type="checkbox"
-                checked={_.find(selectedItems, {item_no: item.item_no})? true: false}
+                checked={isChecked}
                 onChange={()=>changeSelectedItems(item)} />
               <Product product={item} />
-              <button onClick={()=>changeAmount(item, 'plus')}>+</button>
+              <button 
+                className={styles.countButton} 
+                disabled={!isChecked}
+                onClick={()=>changeAmount(item, 'plus')}>+
+              </button>
               <span>{item.amount ? item.amount : 1}</span>
-              <button onClick={()=>changeAmount(item, 'minus')}>-</button>
+              <button 
+                className={styles.countButton} 
+                disabled={!isChecked}
+                onClick={()=>changeAmount(item, 'minus')}>-
+              </button>
             </div>
             )
         })
