@@ -24,12 +24,32 @@ export default function Cart ({}: IAppProps) {
   },[]);
 
   useEffect(()=>{
+    let availableSum = 0;
+    let notAvailableSum = 0;
     let sum = 0;
+
+    if(selectedCoupon) {
+      selectedItems.map(item=>{
+        if(item.availableCoupon) {
+          availableSum += item.price;
+        }else {
+          notAvailableSum += item.price;
+        }
+      });
+
+      if(selectedCoupon.discountRate) {
+        sum += (availableSum * (1-selectedCoupon.discountRate));
+      }
+
+      if(selectedCoupon.discountAmount) {
+        sum += (availableSum - selectedCoupon.discountAmount);
+      }
+    }
     selectedItems.map((item)=>{
       sum += ((item.amount) * item.price)
     });
 
-    setTotalPrice(sum);
+    setTotalPrice(sum + notAvailableSum);
   },[selectedItems, selectedCoupon])
 
   const changeSelectedItems = (item:CartItem) => {
@@ -73,6 +93,7 @@ export default function Cart ({}: IAppProps) {
                 checked={isChecked}
                 onChange={()=>changeSelectedItems(item)} />
               <Product product={item} />
+              {item?.availableCoupon !== false ? '쿠폰사용 가능' : '쿠폰 사용 불가능'}
               <button 
                 className={styles.countButton} 
                 disabled={!isChecked}
@@ -91,7 +112,7 @@ export default function Cart ({}: IAppProps) {
       </div>
       <div>
         상품 가격 : {totalPrice}<br/>
-        선택된 쿠폰 : {selectedCoupon?.title}<br/>
+        {selectedCoupon && <span>선택된 쿠폰 : {selectedCoupon?.title}<br/></span>}
         <button onClick={()=>{setIsCouponOpen(!isCouponOpen)}}>쿠폰사용</button><br/>
         <div 
           className={classnames(styles.couponList,{[styles.isShow]: isCouponOpen})}>
