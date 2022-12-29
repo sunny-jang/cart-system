@@ -11,7 +11,7 @@ export default function Product ({product, cart, setCart}: IAppProps) {
 
   return (
       <div className={styles.product}>
-        <div className={styles.productThumbnail}><img src={product.detail_image_url} /></div>
+        <div className={styles.productThumbnail}><img src={product.detail_image_url} width={100} height={100} alt={product.item_name} /></div>
         <div className={styles.productInfo}>
           <div className={styles.productName}>{product.item_name}</div>
           <div className={styles.productPrice}>{product.price}원</div>
