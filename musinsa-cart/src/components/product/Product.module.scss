@@ -21,16 +21,33 @@
     font-weight: 500;
     font-size: 13px;
     line-height: 1.2;
-    height: 30px;
+    max-height: 30px;
     overflow: hidden;
     text-overflow: ellipsis;
-    white-space: nowrap;
     word-wrap: break-word;
     margin-bottom: 10px;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
   }
 
   .productPrice {
     font-weight: bold;
     font-weight: 13px;
+  }
+
+  .setCart {
+    border: none;
+    background-color: black;
+    color: white;
+    border-radius: 4px;
+    font-size: 12px;
+    padding: 3px 5px;
+  }
+
+  .couponAvilable {
+    font-size: 12px;
+    display: block;
+    margin: 5px 0;
   }
 }
