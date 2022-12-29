@@ -19,18 +19,16 @@ http://localhost:3001 에서 프로젝트가 실행됩니다.
 ## ROUTES
 
 ### **‘/products’ - 상품리스트 화면**
-
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/2de8827c-91a3-4385-8541-66b6fb8e987a/Untitled.png)
+![image](https://user-images.githubusercontent.com/35230852/209989744-5a3762a0-fe1d-42fa-931b-204aebc35522.png)
 
 ### **‘/cart’ - 장바구니 화면**
 
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/c789a55f-a88c-48e2-97ec-b6657433603a/Untitled.png)
+![image](https://user-images.githubusercontent.com/35230852/209989766-ec46341d-a8a6-4e12-9410-423a8ebf9677.png)
 
 **장바구니/ 상품 리스트가 없을 때**
 
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/cbc3054f-5982-4c7c-bba7-ff8612cb43d5/Untitled.png)
-
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/5aed39c6-ec38-41b3-81c7-c6c125e6882c/Untitled.png)
+![image](https://user-images.githubusercontent.com/35230852/209989828-d6b4d18f-ad39-4047-8265-c7abfab0e375.png)
+![image](https://user-images.githubusercontent.com/35230852/209989853-79300b24-a67e-4d8a-a080-48043510d181.png)
 
 **아래는요구사항에는 없지만 사용성을 위해 추가로 작업되었습니다.** 
 
