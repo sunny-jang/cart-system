@@ -21,3 +21,24 @@
     font-weight: bold;
   }
 }
+
+.couponList {
+  position: absolute;
+  border: 1px solid #ccc;
+  background-color: white;
+  display: none;
+
+  &.isShow {
+    display: block;
+  }
+
+  .coupon {
+    padding: 10px;
+    cursor: pointer;
+    border-bottom: 1px solid #ccc;
+
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+}
