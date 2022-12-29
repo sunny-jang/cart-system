@@ -23,11 +23,10 @@ export default function Calculator ({selectedItems}: IAppProps) {
       </div>
       <div className={styles.calculatorPrice}>
         <div className={styles.priceBeforeDC}>
-          <span className={styles.price}>{priceBeforeDC}</span>
-          원</div>
+          <span className={styles.price}>{Math.floor(priceBeforeDC)}</span>원</div>
         <div className={styles.discount}>
-        <span className={styles.price}>{totalDiscount}</span>원</div>
-        <div className={styles.totalPrice}><span className={styles.price}>{totalPrice}</span>원</div>
+        <span className={styles.price}>{Math.floor(totalDiscount)}</span>원</div>
+        <div className={styles.totalPrice}><span className={styles.price}>{Math.floor(totalPrice)}</span>원</div>
       </div>
       <div className={styles.couponSelect}>
         <button onClick={()=>{setIsCouponOpen(!isCouponOpen)}}>쿠폰사용</button>
