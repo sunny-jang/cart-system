@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { productItems, coupons } from '../../data/data.js';
+import { productItems } from '../../data/data.js';
 import styles from './index.module.scss';
-import _ from 'lodash';
 import Calculator from '../../components/cart/Calculator';
 import CartItem from '../../components/cart/CartItem';
+import _ from 'lodash';
 
 export interface IAppProps {}
 
@@ -48,18 +48,14 @@ export default function Cart ({}: IAppProps) {
   
   return (
     <div className={styles.cart}>
-      <h2>장바구니</h2>
+      <h1>장바구니</h1>
       <div className={styles.cartList}>
       {
         cartItems.map((item, index)=>{
           const isChecked = _.find(selectedItems, {item_no: item.item_no})? true: false;
           const cartItem = {item, isChecked, changeAmount, changeSelectedItems};
           
-          return (
-            <CartItem
-              {...cartItem}
-             />
-            )
+          return <CartItem {...cartItem} key={index} />
         })
       }
       </div>

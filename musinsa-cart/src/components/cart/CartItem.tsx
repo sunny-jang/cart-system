@@ -11,27 +11,26 @@ export interface IAppProps {
 
 export default function CartItem ({item, isChecked, changeSelectedItems, changeAmount}: IAppProps) {
  
- 
   return (
     <div className={styles.cartItem}>
-              <input 
-                className={styles.checkbox}
-                type="checkbox"
-                checked={isChecked}
-                onChange={()=>changeSelectedItems(item)} />
-              <Product product={item} />
-              
-              <button 
-                className={styles.countButton} 
-                disabled={!isChecked}
-                onClick={()=>changeAmount(item, 'plus')}>+
-              </button>
-              <span>{item.amount ? item.amount : 1}</span>
-              <button 
-                className={styles.countButton} 
-                disabled={!isChecked}
-                onClick={()=>changeAmount(item, 'minus')}>-
-              </button>
-            </div>
+      <input 
+        className={styles.checkbox}
+        type="checkbox"
+        checked={isChecked}
+        onChange={()=>changeSelectedItems(item)} />
+      <Product product={item} />
+      
+      <button 
+        className={styles.countButton} 
+        disabled={!isChecked}
+        onClick={()=>changeAmount(item, 'plus')}>+
+      </button>
+      <span>{item.amount ? item.amount : 1}</span>
+      <button 
+        className={styles.countButton} 
+        disabled={!isChecked}
+        onClick={()=>changeAmount(item, 'minus')}>-
+      </button>
+    </div>
   )
 }
