@@ -3,6 +3,7 @@ import Product from '../../components/product/Products';
 import { productItems } from '../../data/data.js';
 import styles from './products.module.scss';
 import { useCartState } from './hooks';
+import { Link } from 'react-router-dom';
 
 
 export interface IAppProps {}
@@ -31,21 +32,29 @@ export default function Products ({}: IAppProps) {
   }
   
   useEffect(()=>{
-    setList(chunk(productItems, divNum));
+    setList(chunk([], divNum));
   },[]);
 
   return (
-    <div className={styles.products}>
-      {
-        list?.[page-1]?.map((product, index)=>{
-            return <Product product={product} cart={cart} setCart={modifyCart} key={index} />
-        })
-      }
-      {
-        list.map((item, index)=>{
-          return <button key={index} onClick={()=>setPage(index+1)}>{index+1}</button>
-        }) 
-      }
-    </div>
+      <div className={styles.products}>
+      <h1>상품 리스트</h1>
+        {
+          list.length <=0 
+          ? <div className={styles.noContent}>상품 목록이 준비 중입니다.</div>
+            : list?.[page-1]?.map((product, index)=>{
+              return <Product product={product} cart={cart} setCart={modifyCart} key={index} />
+          })
+        }
+        <div className={styles.pagination}>
+          {
+            list.map((item, index)=>{
+              return <button className={styles.paginationItem} key={index} onClick={()=>setPage(index+1)}>{index+1}</button>
+            }) 
+          }
+        </div>
+        <div  className={styles.linkCart}>
+          <Link to={`/cart`}>장바구니 바로가기</Link>
+        </div>
+      </div>
   );
 }

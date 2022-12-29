@@ -1,6 +1,49 @@
 
   .products { 
     width: 1000px;
+    padding: 0px 150px;
 
-    
+    .noContent {
+      text-align: center;
+      font-weight: bold;
+      font-size: 20px;
+      padding: 50px 0;
+      border-top: 3px solid #000;
+    }
+
+    .pagination {
+      margin: 20px auto;
+      width: 500px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      .paginationItem {
+        border: 0;
+        font-size: 30px;
+        font-weight: bold;
+        background-color: white;
+        cursor: pointer;
+
+        &:hover {
+          color: gray;
+        }
+      }
+    }
+
+    .linkCart {
+      text-align: center;
+
+      a {
+        padding: 16px 24px;
+        background-color: black;
+        color: white;
+        text-decoration: none;
+        border-radius: 10px;
+
+        &:hover {
+          background-color: #222222;
+        }
+      }
+    }
   }
