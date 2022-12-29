@@ -32,7 +32,7 @@ export default function Products ({}: IAppProps) {
   }
   
   useEffect(()=>{
-    setList(chunk([], divNum));
+    setList(chunk(productItems, divNum));
   },[]);
 
   return (
