@@ -16,26 +16,39 @@ export default function Calculator ({selectedItems}: IAppProps) {
 
   return (
     <div className={styles.calculator}>
-        <div className={styles.priceBeforeDC}>상품 금액 : {priceBeforeDC}원</div>
-        <div className={styles.discount}>할인된 금액 : -{totalDiscount}원</div>
-        <div className={styles.totalPrice}>결제 금액 : {totalPrice}원</div>
-        
+      <div className={styles.calculatorHeader}>
+        <div className={styles.header}>총 주문금액</div>
+        <div className={styles.header}>총 할인금액</div>
+        <div className={styles.header}>총 결제금액</div>
+      </div>
+      <div className={styles.calculatorPrice}>
+        <div className={styles.priceBeforeDC}>
+          <span className={styles.price}>{priceBeforeDC}</span>
+          원</div>
+        <div className={styles.discount}>
+        <span className={styles.price}>{totalDiscount}</span>원</div>
+        <div className={styles.totalPrice}><span className={styles.price}>{totalPrice}</span>원</div>
+      </div>
+      <div className={styles.couponSelect}>
         <button onClick={()=>{setIsCouponOpen(!isCouponOpen)}}>쿠폰사용</button>
-        {selectedCoupon && <span> 선택된 쿠폰 : {selectedCoupon?.title}<br/></span>}
+          {selectedCoupon && <span> 선택된 쿠폰 : {selectedCoupon?.title}<br/></span>}
 
-        <div 
-          className={classnames(styles.couponList,{[styles.isShow]: isCouponOpen})}>
-          {coupons.map((coupon,index) => {
-            return <div 
-              onClick={()=>{
-                setSelectedCoupon(coupon);
-                setIsCouponOpen(!isCouponOpen)
-              }}
-              className={styles.coupon} 
-              key={index}>{coupon.title}
-            </div>
-          })}
-        </div>
+          <div 
+            className={classnames(styles.couponList,{[styles.isShow]: isCouponOpen})}>
+            {coupons.map((coupon,index) => {
+              return <div 
+                onClick={()=>{
+                  setSelectedCoupon(coupon);
+                  setIsCouponOpen(!isCouponOpen)
+                }}
+                className={styles.coupon} 
+                key={index}>{coupon.title}
+              </div>
+            })}
+          </div>
+      </div>
+        
+        
       </div>
   )
 }
