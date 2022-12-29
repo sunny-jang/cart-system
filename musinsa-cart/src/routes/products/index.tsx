@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Product from '../../components/product/Products';
 import { productItems } from '../../data/data.js';
-import styles from './products.module.scss';
+import styles from './index.module.scss';
 import { useCartState } from './hooks';
 import { Link } from 'react-router-dom';
 
