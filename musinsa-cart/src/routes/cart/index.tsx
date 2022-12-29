@@ -11,6 +11,8 @@ export default function Cart ({}: IAppProps) {
   const [selectedItems, setSelectedItems] = useState<Array<CartItem>>([]);
   const [cartItems, setCartItems] = useState<Array<CartItem>>([]);
   const [totalPrice, setTotalPrice] = useState(0);
+  const [totalDiscount, setTotalDiscount] = useState(0);
+  const [priceBeforeDC, setPriceBeforeDC] = useState(0);
   const [isCouponOpen, setIsCouponOpen] = useState(false);
   const [selectedCoupon, setSelectedCoupon] = useState<Coupon>()
 
@@ -24,30 +26,44 @@ export default function Cart ({}: IAppProps) {
   },[]);
 
   useEffect(()=>{
+    let sum = 0;
+    selectedItems.map((item)=>{
+      sum += ((item.amount) * item.price)
+    });
+
+    setPriceBeforeDC(sum);
+  },[selectedItems])
+
+  useEffect(()=>{
     let availableSum = 0;
     let notAvailableSum = 0;
+    let totalDC = 0;
     let sum = 0;
 
     if(selectedCoupon) {
       selectedItems.map(item=>{
-        if(item.availableCoupon) {
-          availableSum += item.price;
+        if(item.availableCoupon!==false) {
+          availableSum += (item.price * item.amount);
         }else {
-          notAvailableSum += item.price;
+          notAvailableSum += (item.price * item.amount);
         }
       });
 
       if(selectedCoupon.discountRate) {
-        sum += (availableSum * (1-selectedCoupon.discountRate));
+        sum += (availableSum * (1-(selectedCoupon.discountRate/100)));
+        setTotalDiscount(availableSum * ((selectedCoupon.discountRate/100)));
+      }else if(selectedCoupon.discountAmount) {
+        if(availableSum !== 0) {
+          sum += (availableSum - selectedCoupon.discountAmount);
+          setTotalDiscount(selectedCoupon.discountAmount);
+        };
       }
 
-      if(selectedCoupon.discountAmount) {
-        sum += (availableSum - selectedCoupon.discountAmount);
-      }
+    } else {
+        selectedItems.map((item)=>{
+          sum += ((item.amount) * item.price)
+        });
     }
-    selectedItems.map((item)=>{
-      sum += ((item.amount) * item.price)
-    });
 
     setTotalPrice(sum + notAvailableSum);
   },[selectedItems, selectedCoupon])
@@ -93,7 +109,7 @@ export default function Cart ({}: IAppProps) {
                 checked={isChecked}
                 onChange={()=>changeSelectedItems(item)} />
               <Product product={item} />
-              {item?.availableCoupon !== false ? '쿠폰사용 가능' : '쿠폰 사용 불가능'}
+              
               <button 
                 className={styles.countButton} 
                 disabled={!isChecked}
@@ -111,7 +127,9 @@ export default function Cart ({}: IAppProps) {
       }
       </div>
       <div>
-        상품 가격 : {totalPrice}<br/>
+        상품 금액 : {priceBeforeDC}원<br/>
+        할인된 금액 : {totalDiscount}원<br/>
+        결제 금액 : {totalPrice}원<br/>
         {selectedCoupon && <span>선택된 쿠폰 : {selectedCoupon?.title}<br/></span>}
         <button onClick={()=>{setIsCouponOpen(!isCouponOpen)}}>쿠폰사용</button><br/>
         <div 
