@@ -4,6 +4,7 @@ import styles from './index.module.scss';
 import Calculator from '../../components/cart/Calculator';
 import CartItem from '../../components/cart/CartItem';
 import _ from 'lodash';
+import { Link } from 'react-router-dom';
 
 export interface IAppProps {}
 
@@ -48,7 +49,10 @@ export default function Cart ({}: IAppProps) {
   
   return (
     <div className={styles.cart}>
-      <h1>장바구니</h1>
+      <div className={styles.header}>
+        <h1>장바구니</h1>
+        <Link to='/products' className={styles.linkToProducts}>상품 더 보러가기</Link>
+      </div>
       <div className={styles.cartList}>
       {
         cartItems.map((item, index)=>{

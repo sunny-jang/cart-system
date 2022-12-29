@@ -1,8 +1,26 @@
 .cart {
   width: 1000px;
   padding: 0px 150px;
+
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
 }
 
 .cartList {
   border-top: 3px solid #000;
+}
+
+.linkToProducts {
+  padding: 16px 24px;
+    background-color: black;
+    color: white;
+    text-decoration: none;
+    border-radius: 10px;
+
+    &:hover {
+      background-color: #222222;
+    }
 }
