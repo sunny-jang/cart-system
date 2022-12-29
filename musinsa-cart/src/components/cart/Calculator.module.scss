@@ -1,0 +1,23 @@
+
+.calculator {
+  border: 1px solid #ccc;
+  padding: 16px 24px;
+
+  .priceBeforeDC, .discount, .totalPrice {
+    margin-bottom: 6px;
+  }
+
+  .priceBeforeDC {
+    font-size: 18px;
+  }
+
+  .discount {
+    color: red;
+    font-weight: bold;
+  }
+
+  .totalPrice {
+    font-size: 20px;
+    font-weight: bold;
+  }
+}
