@@ -45,7 +45,9 @@ export default function Product ({product}: IAppProps) {
           <div className={styles.productInfo}>
             <div className={styles.productName}>{product.item_name}</div>
             <div className={styles.productPrice}>{product.price}원</div>
-
+            <div>
+              {product?.availableCoupon !== false ? '쿠폰사용 가능' : '쿠폰 사용 불가능'}
+            </div>
             <button onClick={()=>{setCart(product.item_no)}}>{cart?.includes(product.item_no) ? '빼기' : '담기'}</button>
           </div>
       </div>
