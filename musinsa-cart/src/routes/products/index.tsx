@@ -37,7 +37,7 @@ export default function Products ({}: IAppProps) {
 
   return (
       <div className={styles.products}>
-      <h1>상품 리스트</h1>
+      <h1>상품 목록</h1>
         {
           list.length <=0 
           ? <div className={styles.noContent}>상품 목록이 준비 중입니다.</div>
