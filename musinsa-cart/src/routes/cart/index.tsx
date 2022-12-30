@@ -14,7 +14,7 @@ export default function Cart ({}: IAppProps) {
 
   useEffect(()=>{
     let addedItems = JSON.parse(localStorage.getItem("cart")+'');
-    let items: CartItem[] = addedItems.map((item: number)=>{
+    let items: CartItem[] = addedItems?.map((item: number)=>{
       return {...(_.find(productItems, { item_no: item })), amount: 1};
     });
 
@@ -55,12 +55,12 @@ export default function Cart ({}: IAppProps) {
       </div>
       <div className={styles.cartList}>
       {
-        cartItems.length <= 0 
+        (!cartItems || cartItems?.length <= 0)
         ? <div className={styles.noContent}>
             <span>장바구니에 담은 상품이 없습니다!</span>
             <Link to='/products' className={styles.linkToProducts}>상품 구경하기</Link>
           </div>
-        : cartItems.map((item, index)=>{
+        : cartItems?.map((item, index)=>{
           const isChecked = _.find(selectedItems, {item_no: item.item_no})? true: false;
           const cartItem = {item, isChecked, changeAmount, changeSelectedItems};
           

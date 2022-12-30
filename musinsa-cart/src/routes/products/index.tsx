@@ -39,7 +39,7 @@ export default function Products ({}: IAppProps) {
       <div className={styles.products}>
       <h1>상품 목록</h1>
         {
-          list.length <=0 
+          list?.length <=0 
           ? <div className={styles.noContent}>상품 목록이 준비 중입니다.</div>
             : list?.[page-1]?.map((product, index)=>{
               return <Product product={product} cart={cart} setCart={modifyCart} key={index} />
@@ -47,7 +47,7 @@ export default function Products ({}: IAppProps) {
         }
         <div className={styles.pagination}>
           {
-            list.map((item, index)=>{
+            list?.map((item, index)=>{
               return <button className={styles.paginationItem} key={index} onClick={()=>setPage(index+1)}>{index+1}</button>
             }) 
           }
