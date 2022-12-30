@@ -24,6 +24,8 @@ export const usePrice = (selectedItems: CartItem[], selectedCoupon?: Coupon ) =>
         if(availableSum !== 0) {
           sum += (availableSum - selectedCoupon.discountAmount);
           setTotalDiscount(selectedCoupon.discountAmount);
+        }else {
+          setTotalDiscount(0);
         };
       }
 
