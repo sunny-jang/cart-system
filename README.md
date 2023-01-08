@@ -7,7 +7,7 @@
 내부 경로로 이동 후 노드 패키지들을 install 해주세요. 🙂
 
 ```bash
-$ cd musinsa-cart
+$ cd cart
 $ npm install
 $ npm start
 
