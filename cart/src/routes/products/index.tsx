@@ -17,7 +17,7 @@ interface Product {
 }
 
 export default function Products ({}: IAppProps) {
-  const [divNum, setDivNum] = useState(5);
+  const divNum = 5;
   const [page, setPage] = useState(1);
   const [list, setList] = useState<Product[][]>([]);
   const {cart, modifyCart} = useCartState();
