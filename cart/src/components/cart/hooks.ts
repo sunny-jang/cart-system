@@ -39,17 +39,17 @@ const groupAvailablePrice = (selectedItems:CartItem[]) =>{
 }
 
 const applyCoupon = (availableSum: number,coupon: Coupon)=>{
-  let sum = 0, totalDiscount = 0;
+  let discounted = 0, totalDiscount = 0;
   const discountRate = coupon?.discountRate;
   const discountAmount = coupon?.discountAmount;
 
   if(discountRate) {
-    [sum, totalDiscount] = applyRateCoupon(availableSum, discountRate);
+    [discounted, totalDiscount] = applyRateCoupon(availableSum, discountRate);
   }else if(discountAmount) {
-    [sum, totalDiscount] = applyAmountCoupon(availableSum, discountAmount);
+    [discounted, totalDiscount] = applyAmountCoupon(availableSum, discountAmount);
   }
 
-  return [sum, totalDiscount]
+  return {discounted, totalDiscount}
 }
 
 export const usePrice = (selectedItems: CartItem[], selectedCoupon?: Coupon ) => {
@@ -61,10 +61,7 @@ export const usePrice = (selectedItems: CartItem[], selectedCoupon?: Coupon ) =>
     let { availableSum, notAvailableSum } = groupAvailablePrice(selectedItems);  
 
     if(selectedCoupon) { 
-      let result = applyCoupon(availableSum, selectedCoupon);
-      let discounted = result[0];
-      let totalDiscount = result[1]
-
+      let {discounted, totalDiscount} = applyCoupon(availableSum, selectedCoupon);
       sum = discounted + notAvailableSum;
       setTotalDiscount(totalDiscount);
     } else {
