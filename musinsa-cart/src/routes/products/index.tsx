@@ -8,14 +8,6 @@ import { Link } from 'react-router-dom';
 
 export interface IAppProps {}
 
-interface Product {
-	item_no: number,
-  item_name: string,
-  detail_image_url: string,
-  price: number,
-  score: number,
-}
-
 export default function Products ({}: IAppProps) {
   const [divNum, setDivNum] = useState(5);
   const [page, setPage] = useState(1);
